@@ -1,0 +1,26 @@
+create table Address( address_id int primary key, region varchar(25) );
+
+insert into Address(1, 'Uran');
+insert into Address(2, 'Pen');
+insert into Address(3, 'Panvel');
+
+create table doctor( doctor_id int primary key, doctor_qualification varchar(20), doctor_type varchar(20), doctor_name varchar(20), doctor_address int, foreign key (doctor_address ) references address(address_id) );
+
+
+insert into doctor(2,'M.B.B.S', 'neurosergon', 'Vivek',2);
+insert into doctor(1,'M.D', 'Heart', 'Sushit',2);
+insert into doctor(2,'M.D', 'Brain', 'Keshav',3);
+
+select * from doctor;
+
+// Slice
+select * from doctor where doctor_id=1;
+
+// Dice
+select * from doctor where doctor_id=1 or doctor_id=3;
+
+// Roll Up
+select count(doctor_id), doctor_address from doctor group by doctor_address;
+
+// Drill Down
+select doctor_id, doctor_name, doctor_type from doctor where doctor_address = 3;
